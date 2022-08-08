@@ -1,0 +1,907 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:xml="http://www.w3.org/XML/1998/namespace"
+	xmlns:ewp="https://github.com/erasmus-without-paper/ewp-specs-architecture/blob/stable-v1/common-types.xsd"
+	xmlns:p="https://github.com/erasmus-without-paper/ewp-specs-types-phonenumber/tree/stable-v1"
+	elementFormDefault="qualified"
+
+	targetNamespace="https://github.com/erasmus-without-paper/ewp-specs-api-bm-mobilities/blob/stable-v1/endpoints/report-request.xsd"
+	xmlns="https://github.com/erasmus-without-paper/ewp-specs-api-bm-mobilities/blob/stable-v1/endpoints/report-request.xsd">
+
+	<xs:import
+		schemaLocation="https://raw.githubusercontent.com/erasmus-without-paper/ewp-specs-architecture/stable-v1/common-types.xsd"
+		namespace="https://github.com/erasmus-without-paper/ewp-specs-architecture/blob/stable-v1/common-types.xsd" />
+
+	<xs:import
+		schemaLocation="https://raw.githubusercontent.com/erasmus-without-paper/ewp-specs-types-phonenumber/stable-v1/schema.xsd"
+		namespace="https://github.com/erasmus-without-paper/ewp-specs-types-phonenumber/tree/stable-v1" />
+
+	<xs:annotation>
+		<xs:documentation>
+			This schema is a part of the Erasmus Without Paper project. Before you start using it,
+			make sure you have read the general rules described here:
+
+			http://developers.erasmuswithoutpaper.eu/
+		</xs:documentation>
+	</xs:annotation>
+
+	<xs:element name="bm-mobilities-report-request">
+		<xs:annotation>
+			<xs:documentation>
+				This describes the format of the REQUEST to be submitted to the `report` endpoint of EWP
+				Beneficiary Module Mobilities API.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="mobility" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>
+							Element providing information specific to the individual mobility.
+						</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="agreement-number" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+										Grant Agreement Number.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="mobility-id" type="ewp:AsciiPrintableIdentifier">
+								<xs:annotation>
+									<xs:documentation>
+										Mobility activity ID. The unique alphanumeric identification of the mobility
+										activity.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="activity-type">
+								<xs:annotation>
+									<xs:documentation>
+										Type of activity for this mobility.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:string">
+										<xs:enumeration value="HE-SMS">
+											<xs:annotation>
+												<xs:documentation>
+													Student Mobility for Studies
+												</xs:documentation>
+											</xs:annotation>
+										</xs:enumeration>
+										<xs:enumeration value="HE-SMT">
+											<xs:annotation>
+												<xs:documentation>
+													Student Mobility for Traineeships
+												</xs:documentation>
+											</xs:annotation>
+										</xs:enumeration>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="long-term" type="xs:boolean">
+								<xs:annotation>
+									<xs:documentation>
+										Indicates if the activity is a long-term one following what is defined in the
+										Erasmus+ Programme Guide.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="blended" type="xs:boolean">
+								<xs:annotation>
+									<xs:documentation>
+										Flag indicating that the Mobility activity is carried out in a blended format
+										(physical activity abroad combined with a virtual component).
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="bip" type="xs:boolean">
+								<xs:annotation>
+									<xs:documentation>
+										Flag indicating that the Mobility activity is part of Blended Intensive Programme.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="bip-id" type="xs:boolean" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>
+										Blended Intensive Programme ID. Unique identifier of the blended intensive
+										programme in which the participant participates in project. Required if `bip` flag is set to true.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="virtual-description" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>
+										Virtual Component Description. Description of the content of the virtual component
+										of the blended Mobility activity, including blended intensive programmes.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="virtual-duration" type="xs:integer" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>
+										Virtual Component Duration. Expressed in number of contact hours.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="virtual-timing" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>
+										Virtual Component Timing. The set of allowed values is defined in Beneficiary
+										Module Data Dictionary for call 2021 KA131-HED mobility activities for higher education students and
+										staff: VIRTUAL_TIMING.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="international" type="xs:boolean">
+								<xs:annotation>
+									<xs:documentation>
+										International Mobility activity. Flag indicating that the Mobility activity is a
+										mobility between a Programme Country and a Partner Country.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="doctoral" type="xs:boolean">
+								<xs:annotation>
+									<xs:documentation>
+										Doctoral Mobility activity. Flag indicating that the Mobility activity is taking
+										place at doctoral level (EQF level 8) or that the participant is a doctoral candidate or a post-doc.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="combined" type="xs:boolean">
+								<xs:annotation>
+									<xs:documentation>
+										Combined Study and Traineeship Mobility activity. A flag indicating that the study
+										mobility activity is combined with a traineeship abroad as an overall study mobility activity for
+										the same student.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="digital-skills" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+										Level of digital skills acquired during the mobility. The set of allowed values is
+										defined in Beneficiary Module Data Dictionary for call 2021 KA131-HED mobility activities for higher
+										education students and staff: DIGITAL_SKILLS.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="force-majeure" type="xs:boolean">
+								<xs:annotation>
+									<xs:documentation>
+										A flag indicating if the Mobility activity is classified as force majeure.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="force-majeure-expl" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>
+										The explanation why the mobility is considered as a case of force majeure.
+										Applicable and required if `force-majeure` flag is set to true.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="participant" type="MobilityParticipant" />
+							<xs:element name="isced-f-code" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+										The field of education of the Mobility activity. These are the 2013 ISCED field of
+										education codes maintained by OECD/CoE. For Higher Education: Only level 4 terms are to be used
+										(4-digits 2013 ISCED codes).
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="eqf-study-level" type="ewp:EqfLevel" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>
+										The level of study for the Mobility activity.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="previous-participation">
+								<xs:annotation>
+									<xs:documentation>
+										The accumulated duration in months of all previous Erasmus Mundus or Erasmus+
+										Mobility activities of the same student at the same study level/cycle. Physical participation in
+										short-term Mobility activity counts as follows: (Number of days / 30) months e.g. 15 days/30 = 0.5
+										month.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:decimal">
+										<xs:minInclusive value="0" />
+										<xs:fractionDigits value="2" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="main-language">
+								<xs:annotation>
+									<xs:documentation>
+										Main Instruction/Work/Volunteering language. The main language that the individual
+										participant uses for learning or work (training/traineeship) purposes during the Mobility activity
+										abroad. The set of allowed values is defined in Beneficiary Module Data Dictionary for call 2021
+										KA131-HED mobility activities for higher education students and staff: LANGUAGES.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:complexType>
+									<xs:simpleContent>
+										<xs:extension base="xs:string">
+											<xs:attribute name="native-speaker" use="optional" type="xs:boolean">
+												<xs:annotation>
+													<xs:documentation>
+														A flag indicating that the participant is a native speaker of the main language
+														or has duly justified reasons to be exempted from the language assessment.
+													</xs:documentation>
+												</xs:annotation>
+											</xs:attribute>
+										</xs:extension>
+									</xs:simpleContent>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="other-language" type="xs:string" minOccurs="0" maxOccurs="3">
+								<xs:annotation>
+									<xs:documentation>
+										Other used languages in day-to-day situations that are not necessarily linked to
+										the mobility activity itself. The set of allowed values is defined in Beneficiary Module Data
+										Dictionary for call 2021 KA131-HED mobility activities for higher education students and staff:
+										LANGUAGES.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="la-id" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>
+										Learning agreement identifier.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="participant-report" type="ParticipantReportInfo" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>
+										Information about the Participant Report.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="recognition-report" type="ParticipantReportInfo" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>
+										Information about the Participant Report on Recognition. When filling the standard
+										participant report, if the student reports that the process of recognition is not finalized, he/she
+										will not be asked to complete the recognition part (he will not be able to see it). The student will
+										receive the part on the recognition process in a separate Participant Report on Recognition, one
+										month after the mobility has ended.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="credits-number" type="xs:decimal" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>
+										Number of Recognised Credits. The number of ECTS credits (or any other comparable
+										system, appropriate for the action type) awarded by the sending higher education institution (HEI)
+										to the student.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="sending-organization" type="Organization" />
+							<xs:element name="sending-org-department" type="xs:string" minOccurs="0" />
+							<xs:element name="receiving-organization" type="Organization" />
+							<xs:element name="receiving-org-department" type="xs:string" minOccurs="0" />
+							<xs:element name="sending-country" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>
+										The country which the participant in the mobility activity leaves from. The set of
+										allowed values is defined in Beneficiary Module Data Dictionary for call 2021 KA131-HED mobility
+										activities for higher education students and staff: COUNTRIES.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="sending-city" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>
+										The city from which the participant in the mobility activity leaves from.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="receiving-country" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+										The country of the organization receiving the participant. The set of allowed
+										values is defined in Beneficiary Module Data Dictionary for call 2021 KA131-HED mobility activities
+										for higher education students and staff: COUNTRIES.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="receiving-city" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>
+										The city where the receiving organization is officially located and where the
+										Mobility activity takes place.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="outer-most" type="xs:boolean" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>
+										A flag indicating that the Mobility activity participant is coming from an
+										outer-most region of a Programme Country or OCT (Overseas Countries and Territories) associated to a
+										Programme Country.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="distance-band" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>
+										The distance band applicable to the countries and cities entered. The set of
+										allowed values is defined in Beneficiary Module Data Dictionary for call 2021 KA131-HED mobility
+										activities for higher education students and staff: DISTANCE_BANDS.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="location-comments" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>
+										Explanation why a location/city is different from the ones of the sending/receiving
+										organizations. Mandatory if a country or city is different from the ones of the sending/receiving
+										organizations.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="transport-means" type="xs:string" maxOccurs="unbounded">
+								<xs:annotation>
+									<xs:documentation>
+										List of transport means. The set of allowed values is defined in Beneficiary Module
+										Data Dictionary for call 2021 KA131-HED mobility activities for higher education students and staff:
+										TRANSPORT_MEANS.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="green-travel" type="xs:boolean">
+								<xs:annotation>
+									<xs:documentation>
+										Sustainable means of transport (green travel). Flag indicating that less polluting
+										transport was used during travels.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="real-distance" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>
+										Real distance traveled, in kilometers.
+									</xs:documentation>
+								</xs:annotation>
+								<xs:simpleType>
+									<xs:restriction base="xs:decimal">
+										<xs:minInclusive value="0" />
+										<xs:fractionDigits value="2" />
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:element>
+							<xs:element name="duration" type="Duration" />
+							<xs:element name="budget" type="Budget" />
+							<xs:element name="overall-comments" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>
+										Any piece of information that is considered important to explain any relevant
+										aspect related to the mobility activity such as the source of non-EU funding (national, regional,
+										local) etc.
+									</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:complexType name="MobilityParticipant">
+		<xs:sequence>
+			<xs:element name="participant-id" type="ewp:AsciiPrintableIdentifier" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						The alphanumeric participant identification.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="esi" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						European Student Identifier. Unique identifier of the Erasmus+ student developed in the
+						framework of the European Student Card Initiative.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="given-names" type="xs:string" />
+			<xs:element name="family-name" type="xs:string" />
+			<xs:element name="email" type="ewp:Email">
+				<xs:annotation>
+					<xs:documentation>
+						The participant's email address. It should be an email address regularly used by the
+						participant. This email address will be used to send the participant notifications such as the request
+						for filling in the Participant Reports, etc.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="gender" type="ewp:Gender" />
+			<xs:element name="birth-date" type="xs:date" />
+			<xs:element name="nationality" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						The nationality of the participant. May not necessarily be the same as the country of
+						the participant's sending organization. The set of allowed values is defined in Beneficiary Module Data
+						Dictionary for call 2021 KA131-HED mobility activities for higher education students and staff:
+						COUNTRIES.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="recent-graduate" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						A flag indicating if a higher education student or a VET Learner is doing a traineeship
+						abroad as a recent graduate. Required if `activity-type` is set to `HE-SMT`.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fewer-opportunities" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						A flag indicating if the participant qualifies as someone with fewer opportunities
+						according to the Erasmus+ Programme Guide.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ols" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						A flag indicating that the participant is entitled to the Online Language Support.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Organization">
+		<xs:sequence>
+			<xs:element name="id" type="ewp:AsciiPrintableIdentifier">
+				<xs:annotation>
+					<xs:documentation>The unique identifier of the organization.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:element name="erasmus" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>
+							Erasmus code of the organization. If known, Erasmus Code or OID SHOULD be given
+							instead of individual organization data.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="oid" type="xs:string">
+					<xs:annotation>
+						<xs:documentation>
+							OID of the organization. If known, Erasmus Code or OID SHOULD be given instead of
+							individual organization data.
+						</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:sequence>
+					<xs:element name="legal-name" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>
+								The legal name of the organization using only Latin characters.
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="business-name" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>
+								The business name of the organization using any characters (including national
+								language characters).
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="full-legal-name" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+								The full legal name of the organization in the national language using any characters
+								(including national language characters).
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="national-id" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+								The national ID of the organization (if applicable).
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="type" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>
+								Type of the organization. The set of allowed values is defined in Beneficiary Module
+								Data Dictionary for call 2021 KA131-HED mobility activities for higher education students and staff:
+								ORGANISATION_TYPES
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="public-body" type="xs:boolean">
+						<xs:annotation>
+							<xs:documentation>
+								A flag indicating whether the organization is a public body.
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="non-profit" type="xs:boolean">
+						<xs:annotation>
+							<xs:documentation>
+								A flag indicating whether the organization is non-profit.
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="below250" type="xs:boolean">
+						<xs:annotation>
+							<xs:documentation>
+								A flag indicating whether the number of employees of the organization is below 250.
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="legal-address" type="xs:string" />
+					<xs:element name="country" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>
+								Organization country. The set of allowed values is defined in Beneficiary Module Data
+								Dictionary for call 2021 KA131-HED mobility activities for higher education students and staff:
+								COUNTRIES.
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="region" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+								Organization region. The set of allowed values is defined in Beneficiary Module Data
+								Dictionary for call 2021 KA131-HED mobility activities for higher education students and staff: NUTS.
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="po-box" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+								The P.O. Box of the organization.
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="postal-code" type="xs:string" />
+					<xs:element name="cedex" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>
+								The CEDEX code number of the organization.
+							</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="city" type="xs:string" />
+					<xs:element name="email" type="ewp:Email" minOccurs="0" />
+					<xs:element name="website-url" type="ewp:HTTP" minOccurs="0" />
+					<xs:element ref="p:phone-number" maxOccurs="2" />
+					<xs:element ref="p:fax-number" minOccurs="0" />
+				</xs:sequence>
+			</xs:choice>
+			<xs:element name="acronym" type="xs:string" minOccurs="0" />
+			<xs:element name="vat-number" type="xs:string" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Duration">
+		<xs:sequence>
+			<xs:element name="start-date" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>
+						The date on which the physical mobility activity started. In case of participation in a
+						blended intensive programme, the start-date has to be in the period between the start and end date of
+						the physical activity of the blended intensive programme.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="end-date" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>
+						The date on which the physical mobility activity ended. In case of participation in a
+						blended intensive programme, the End Date has to be in the period between the start and end date of the
+						physical activity of the programme.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="virtual-end-date" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						The date on which the virtual component of the blended mobility activity ended. On this
+						date, if later than (physical mobility) end-date, the Participant Report will be sent.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="duration-calculated" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Duration Calculated (days). The calculated duration in calendar days of the Mobility
+						activity taken from the start and end dates (it does not include travel days).
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="interruption-duration" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Interruption Duration (days). The total duration in days of all interruptions that
+						occurred during the mobility activity period.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mobility-duration" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Duration of Mobility Activity Period (days). This field indicates the duration in days
+						of the mobility activity after having removed any interruptions indicated in the field
+						"interruption-duration". It includes extensions funded by Erasmus+ EU funds. It is on this field that
+						the minimum and maximum duration validations are done.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="funded-travel-days" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						The number of days used for travel if necessary, for which individual support is paid.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="nonfunded-duration" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Non-Funded Duration (days). The total duration in days of the mobility activity that is
+						not funded.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="funded-duration" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						The funded duration of the mobility activity.
+					</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="total-days" type="xs:integer">
+							<xs:annotation>
+								<xs:documentation>
+									Funded Duration (days). The total duration in days of the mobility activity that is
+									funded.
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="full-months" type="xs:integer">
+							<xs:annotation>
+								<xs:documentation>
+									Funded Long-Term Duration (full months). Full months calculated based on
+									"total-days". A month is considered to have 30 days.
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="extra-days" type="xs:integer">
+							<xs:annotation>
+								<xs:documentation>
+									Funded Long-Term Duration (extra days). The remainder of the duration calculated in
+									full 30-day months based on field `total-days`.
+								</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="virtual-days" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Duration of virtual part of blended Mobility activity. Applicable and required only for
+						blended mobilities.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="Budget">
+		<xs:sequence>
+			<xs:element name="zero-grant" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						A flag indicating that the mobility grant is not funded by EU Erasmus+ funds.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="student-daily-grant" type="ShortTermGrant" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						The daily base amount granted for individual support for short-term student mobility.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="student-monthly-grant" type="amount" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						The monthly base amount granted for individual support for long-term student mobility,
+						without considering top-up amounts.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fewer-opportunities-daily" type="ShortTermGrant" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Participants With Fewer Opportunities Short-term Mobility Top-up Amount. The mobility
+						top-up amount in order to provide extra support for students flagged as receiving a top-up amount for
+						fewer opportunities. This amount is to be added to the total of the individual support base amount.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="fewer-opportunities-monthly" type="amount" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Participants With Fewer Opportunities Monthly Top-up Amount. The monthly top-up amount
+						in order to provide extra support for students flagged as receiving a top-up amount for fewer
+						opportunities. This amount is to be added to the monthly base grant to calculate the total individual
+						support. The `traineeship-monthly-top-up` may also be added together with this top-up amount.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="traineeship-monthly-top-up" type="amount" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Traineeship Monthly Top-up Amount. The monthly top-up amount to be added to the monthly
+						base grant to calculate the individual support in case of traineeships. The
+						`fewer-opportunities-monthly` may also be added together with this top-up amount. The traineeship top-up
+						is not applicable in case of International Mobilities (`international` flag).
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="travel-top-up" type="amount" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Travel Support Top-up.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="individual-support" type="amount" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						The centrally or locally calculated individual grant according to the Activity Type,
+						National Agency, receiving country, sending country and duration summed with any applicable top-ups.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="travel-support" type="amount" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						The centrally calculated travel grant according to the activity type and distance band.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="travel-support-international" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Travel Support for International Mobility activity. Flag indicating that the
+						beneficiary provided (Yes) or opted out (No) of travel support for students on international mobility
+						who are not participants with fewer opportunities.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="request-exceptional-cost" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Indicates if an exceptional cost for expensive travel is necessary.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="travel-cost-real" type="amount" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						The exceptional cost for expensive travel. This cost and the Travel Support are
+						mutually exclusive.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="travel-cost-exceptional" type="amount" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						The exceptional cost for expensive travel (up to 80% of the eligible travel cost -
+						field `travel-cost-real`). This grant and the Travel Support are mutually exclusive.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="travel-cost-justification" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						The description and justification of the exceptional cost for expensive travel.
+						Mandatory if the `travel-cost-exceptional` is greater than 0.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="inclusion-support" type="amount" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Inclusion Support for Participants. Field where the supplementary cost (i.e. on top of
+						the calculated travel support and individual support) which is related to needs of participants with
+						fewer opportunities, is to be entered.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="additional-eu-grant" type="amount" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Non-Erasmus+ grant from the EU budget.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="additional-non-eu-grant" type="amount" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						The additional total non-EU grant used in the mobility activity.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mobility-grant" type="amount" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Mobility activity Grant (calculated). The total amount for the mobility activity.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="ParticipantReportInfo">
+		<xs:sequence>
+			<xs:element name="request-date" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>
+						The date the report was sent to the participant.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="receive-date" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						The date the report was submitted by the participant.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:simpleType name="amount">
+		<xs:restriction base="xs:decimal">
+			<xs:minInclusive value="0" />
+			<xs:fractionDigits value="2" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="ShortTermGrant">
+		<xs:sequence>
+			<xs:element name="daily5-14" type="amount">
+				<xs:annotation>
+					<xs:documentation>
+						The amount granted for short-term mobility for the period up to the 14th day.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="daily15-30" type="amount">
+				<xs:annotation>
+					<xs:documentation>
+						The amount granted for short-term mobility for the period from the 15th to the 30th
+						day.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>
