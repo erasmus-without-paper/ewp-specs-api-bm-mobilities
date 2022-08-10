@@ -25,17 +25,17 @@ Request method and parameters
    request format which most of other EWP endpoints do.)
 
 
-Handling of invalid parameters
-------------------------------
+Handling invalid requests
+-------------------------
 
  * General [error handling rules][error-handling] apply.
 
- * If some of the required parameters (the ones with `minOccurs="1"`) are
-   missing, or are passed in an invalid format, then the server MUST respond
-   with HTTP 400 error response.
+ * If some of the required elements (the ones without `minOccurs="0"` or described
+   as required in the documentation) are missing, or some of the elements are passed
+   in an invalid format, then the server MUST respond with HTTP 400 error response.
 
- * If the request contains unknown parameters (extra elements not allowed in
-   the schema), then the server MUST ignore such parameters, and continue with
+ * If the request contains unknown elements (extra elements not allowed in
+   the schema), then the server MUST ignore such elements, and continue with
    processing the request.
 
  * If the requester does not cover the sending HEI of the mobility, then server
