@@ -11,7 +11,14 @@ Summary
 If you decide to implement the client side of this API, be aware,
 that until a stable version is released, this API can change to a large extent.**
 
-It allows external clients to report their mobilities to Beneficiary Module.
+It allows external clients to report their mobilities to the Beneficiary Module.
+
+Beneficiary Module is the system for the management of projects that received
+an EU grant under the Erasmus+ programme. The Tool is developed by the European Commission
+for beneficiaries of these projects. In the Beneficiary Module you can provide all the information
+on projects, identify participants and mobility activities, complete and update budget information,
+generate and follow-up participant reports and generate and submit own report(s) to your National Agency.
+The Beneficiary Module Guide can be found here: [https://wikis.ec.europa.eu/x/KKT-AQ](https://wikis.ec.europa.eu/x/KKT-AQ).
 
 
 Security
