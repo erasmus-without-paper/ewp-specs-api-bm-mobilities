@@ -24,6 +24,8 @@ The aim of this API is to provide a solution for HEIs that are participating in 
 of higher education individuals projects, to link their mobility management software (any type)
 to the Beneficiary Module, therefore automatise reporting of individual mobility of students in the Beneficiary Module.
 
+Only student mobility reporting is covered by this API. Staff mobility reporting may be added in the future.
+
 
 Security
 --------
